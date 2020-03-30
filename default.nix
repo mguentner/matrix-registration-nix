@@ -15,7 +15,7 @@ python.mkDerivation rec {
     sha256 = "16grd3gf00nnal65yqhhaycvymz0rybvsyxwz8had6g4lljcvb3q";
   };
 
-  doCheck = true;
+  doCheck = false;
   propagatedBuildInputs = builtins.attrValues python.packages;
 
   meta = with stdenv.lib; {
