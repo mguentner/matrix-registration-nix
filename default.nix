@@ -1,8 +1,6 @@
 { stdenv, pkgs, fetchFromGitHub, python3Packages }:
-let
-  python = python3Packages.python;
-in
-python3Packages.buildPythonPackage rec {
+with python3Packages;
+buildPythonPackage rec {
   pname = "matrix-registration";
   version = "0.7.0";
 
@@ -16,19 +14,19 @@ python3Packages.buildPythonPackage rec {
   doCheck = false;
   propagatedBuildInputs = [
     pkgs.libsndfile
-    python3Packages.appdirs
-    python3Packages.flask
-    python3Packages.flask-cors
-    python3Packages.flask-httpauth
-    python3Packages.flask-limiter
-    python3Packages.flask_sqlalchemy
-    python3Packages.python-dateutil
-    python3Packages.pytest
-    python3Packages.pyyaml
-    python3Packages.requests
-    python3Packages.waitress
-    python3Packages.wtforms
-    python3Packages.setuptools
+    appdirs
+    flask
+    flask-cors
+    flask-httpauth
+    flask-limiter
+    flask_sqlalchemy
+    python-dateutil
+    pytest
+    pyyaml
+    requests
+    waitress
+    wtforms
+    setuptools
   ];
 
   meta = with stdenv.lib; {
