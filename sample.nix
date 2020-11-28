@@ -7,8 +7,10 @@
           server_location = "https://your.home.server.com";
           server_name = "Your Home Server";
           shared_secret = "abc";
+          admin_secret =  "APIAdminPassword";
           riot_instance = "https://riot.home.server.de";
-          db = "db.sqlite3";
+          db = "sqlite:///{cwd}db.sqlite3";
+          host = "localhost";
           port = 8092;
           rate_limit = ["100 per day" "10 per minute"];
           allow_cors = false;
@@ -57,7 +59,7 @@
       Restart = "on-failure";
       RestartSec = 10;
       WorkingDirectory = "/var/lib/matrix-registration";
-      ExecStart = "${matrix-registration}/bin/matrix_registration api";
+      ExecStart = "${matrix-registration}/bin/matrix-registration serve";
     };
   };
 }

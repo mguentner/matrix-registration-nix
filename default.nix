@@ -1,22 +1,35 @@
-{ stdenv, pkgs, fetchFromGitHub }:
-
+{ stdenv, pkgs, fetchFromGitHub, python3Packages }:
 let
-  python = import ./requirements.nix { inherit pkgs; };
+  python = python3Packages.python;
 in
-
-python.mkDerivation rec {
+python3Packages.buildPythonPackage rec {
   pname = "matrix-registration";
-  version = "0.5.5";
+  version = "0.7.0";
 
   src = fetchFromGitHub {
     owner = "ZerataX";
     repo = "matrix-registration";
-    rev = "780e713b3355d42903d173be98dae245319f682a";
-    sha256 = "16grd3gf00nnal65yqhhaycvymz0rybvsyxwz8had6g4lljcvb3q";
+    rev = "b6fdaab6071a72c8ab32d2bc8816a94c2e32ddaa";
+    sha256 = "0xdrg50mjml58ym04mhq82v2fbszslpziqpxy0k1c34spr0aily9";
   };
 
   doCheck = false;
-  propagatedBuildInputs = builtins.attrValues python.packages;
+  propagatedBuildInputs = [
+    pkgs.libsndfile
+    python3Packages.appdirs
+    python3Packages.flask
+    python3Packages.flask-cors
+    python3Packages.flask-httpauth
+    python3Packages.flask-limiter
+    python3Packages.flask_sqlalchemy
+    python3Packages.python-dateutil
+    python3Packages.pytest
+    python3Packages.pyyaml
+    python3Packages.requests
+    python3Packages.waitress
+    python3Packages.wtforms
+    python3Packages.setuptools
+  ];
 
   meta = with stdenv.lib; {
     homepage = https://github.com/ZerataX/matrix-registration/;
